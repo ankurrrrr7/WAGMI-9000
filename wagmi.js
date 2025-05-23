@@ -3,6 +3,11 @@ const fastify = require('fastify');
 const inputValidation = require('./type');
 
 const app = fastify({ logger: true });
+
+app.addHook('onRequest', async (request, reply) => {
+  console.log(`Incoming request: method=${request.method}, url=${request.url}`);
+});
+
 app.post('/wagmi', async (request, reply) => {
   const receivedPayload = request.body || {};
 
@@ -34,10 +39,6 @@ app.post('/wagmi', async (request, reply) => {
     status: "success"
   });
 });
-app.get('/', async (request, reply) => {
-  return { status: 'ok', message: 'Hello World' };
-});
-
 
 const PORT = process.env.PORT || 3000;
 app.listen({ port: PORT, host: '0.0.0.0' }, (err, address) => {
