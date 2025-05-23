@@ -1,3 +1,4 @@
+require('dotenv').config();
 const cluster = require('cluster');
 const os = require('os');
 const fastify = require('fastify');
@@ -46,8 +47,8 @@ if (cluster.isMaster) {
         }
     }
   });
-
-  app.listen({ port: 3000 }, (err, address) => {
+const PORT = process.env.PORT
+  app.listen({ port:PORT }, (err, address) => {
     if (err) {
       app.log.error(err);
       process.exit(1);
@@ -55,67 +56,3 @@ if (cluster.isMaster) {
     console.log(`Worker ${process.pid} started at ${address}`);
   });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// 
-
-// const fastify = require('fastify')({
-//   logger: true
-// })
-
-// // Declare a route
-// fastify.post('/wagmi', async function (request, reply) {
-//     const recievedPayload = request.body || {}
-//     if(Object.keys(recievedPayload).length===0){
-//          return reply.status(200).send({
-//             message: "wagmi",
-//             timestamp: new Date().toISOString(),
-//             lang: "Node.js"
-//         })
-//     }
-//     else{
-//         const parsed = inputValidation.safeParse(recievedPayload)
-//         const sum = parsed.data.a + parsed.data.b;
-//         if(!parsed.success){
-//             return reply.send({
-//                 error:"Invalid inputs"
-//             })
-//         }
-//         else if(sum>100){
-//            return reply.send({
-//                 error:"Invalid inputs"
-//             })
-//         }else{
-//             return reply.send({
-//                 result: sum,
-//                 a: parsed.data.a,
-//                 b: parsed.data.b,
-//                 status: "success"
-//             })
-//         }
-//     }
-// })
-
-// // Run the server!
-// fastify.listen({ port: 3000 }, function (err, address) {
-//   if (err) {
-//     fastify.log.error(err)
-//     process.exit(1)
-//   }
-//   // Server is now listening on ${address}
-// })
