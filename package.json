@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "cluster": "^0.7.7",
+    "fastify": "^5.3.3",
+    "zod": "^3.25.20"
+  },
+  "name": "wagmi-9000",
+  "version": "1.0.0",
+  "main": "wagmi.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ankur Jha",
+  "license": "ISC",
+  "description": ""
+}
